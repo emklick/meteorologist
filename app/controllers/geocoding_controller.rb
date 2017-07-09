@@ -16,26 +16,16 @@ class GeocodingController < ApplicationController
     # ==========================================================================
  
   
-  url = "https://maps.googleapis.com/maps/api/geocode/
-  json?address= 
+  url = "https://maps.googleapis.com/maps/api/geocode/json?=" + @street_address.gsub(" ", "+")
   
-  ?address=@street_address
-  
-   http://api.flickr.com/services/rest/
-      ?method=maps.googleapis
-      &api_key=e0eb58bf4b3e29b253e86d6092e69dee
-      &tags=puppies
-      &format=json
-      &nojsoncallback=1
-      &api_sig=200efb63cb01a3d141fff12585e1e20a
-  
-  
-  parsed_data = JSON.parse(open(url).read)
+
+  raw_data = open(url).read
+  parsed_data = JSON.parse(raw_data)
 
 
-    @latitude = parsed_data["@street_address"][0]["geometry"]["location"]["lat"]
+    @latitude = parsed_data.fetch("results").at(0).fetch("geometry").fetch("location").fetch("lat")
 
-    @longitude = parsed_data["@street_address"][0]["geometry"]["location"]["lng"]
+    @longitude =  parsed_data.fetch("results").at(0).fetch("geometry").fetch("location").fetch("lng")
 
     render("geocoding/street_to_coords.html.erb")
   end
