@@ -14,13 +14,14 @@ class MeteorologistController < ApplicationController
     #
     # The street address that the user typed is in the variable @street_address.
     # ==========================================================================
-require 'open-uri'
-require 'json'
+
 
 require 'open-uri'
 require 'json'
 
 url = "https://maps.googleapis.com/maps/api/geocode/json?address="
+
+
 
 url_url = url + @street_address.gsub(" ", "+")
 
@@ -45,38 +46,38 @@ open(url_url).read
     location["lat"]
     location["lng"]
 
+    @lat = parsed_data["results"][0]["geometry"]["location"]["lat"]
 
+    @lng = parsed_data["results"][0]["geometry"]["location"]["lng"]
+    
 
-    @latitude = parsed_data["results"][0]["geometry"]["location"]["lat"]
-
-    @longitude = parsed_data["results"][0]["geometry"]["location"]["lng"]
-
-
+require 'open-uri'
+require 'json'
 
 address = "https://api.darksky.net/forecast/b46b4b99659871b539612902438165d6/"
 
-url = address + @latitude + , + @longitude
+url = address + @lat + "," + @lng
 
-open(url).read
-    raw_data_forecast = open(url).read
-    raw_data_forecast.class
-    raw_data_forecast.length
-    puts raw_data_forecast
-    parsed_data_forecast = JSON.parse(raw_data_forecast)
-    parsed_data_forecast.class
-    parsed_data_forecast.keys
+  open(url).read
+    raw_data = open(url).read
+    raw_data.class
+    raw_data.length
+    puts raw_data
+    parsed_data = JSON.parse(raw_data)
+    parsed_data.class
+    parsed_data.keys
   
 
 
-    @current_temperature = parsed_data_forecast.fetch("currently").fetch("temperature")
+    @current_temperature = parsed_data.fetch("currently").fetch("temperature")
 
-    @current_summary = parsed_data_forecast.fetch("currently").fetch("summary")
+    @current_summary = parsed_data.fetch("currently").fetch("summary")
 
-    @summary_of_next_sixty_minutes = parsed_data_forecast.fetch("minutely").fetch("summary")
+    @summary_of_next_sixty_minutes = parsed_data.fetch("minutely").fetch("summary")
 
-    @summary_of_next_several_hours = parsed_data_forecast.fetch("hourly").fetch("summary")
+    @summary_of_next_several_hours = parsed_data.fetch("hourly").fetch("summary")
 
-    @summary_of_next_several_days = parsed_data_forecast.fetch("daily").fetch("summary")
+    @summary_of_next_several_days = parsed_data.fetch("daily").fetch("summary")
 
     render("meteorologist/street_to_weather.html.erb")
   end
