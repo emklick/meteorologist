@@ -1,6 +1,7 @@
 require 'open-uri'
 
 class MeteorologistController < ApplicationController
+  
   def street_to_weather_form
     # Nothing to do here.
     render("meteorologist/street_to_weather_form.html.erb")
@@ -8,6 +9,7 @@ class MeteorologistController < ApplicationController
 
   def street_to_weather
     @street_address = params[:user_street_address]
+    
 
     # ==========================================================================
     # Your code goes below.
@@ -15,17 +17,16 @@ class MeteorologistController < ApplicationController
     # The street address that the user typed is in the variable @street_address.
     # ==========================================================================
 
-
 require 'open-uri'
 require 'json'
 
-url = "https://maps.googleapis.com/maps/api/geocode/json?address="
+  url = "https://maps.googleapis.com/maps/api/geocode/json?address="
 
 
 
-url_url = url + @street_address.gsub(" ", "+")
+  url_url = url + @street_address.gsub(" ", "+")
 
-open(url_url).read
+  open(url_url).read
     raw_data = open(url_url).read
     raw_data.class
     raw_data.length
@@ -49,17 +50,19 @@ open(url_url).read
     @lat = parsed_data["results"][0]["geometry"]["location"]["lat"]
 
     @lng = parsed_data["results"][0]["geometry"]["location"]["lng"]
-    
+
+
 
 require 'open-uri'
 require 'json'
 
-address = "https://api.darksky.net/forecast/b46b4b99659871b539612902438165d6/"
+address = "https://api.darksky.net/forecast/b46b4b99659871b539612902438165d6/42.3601,-71.0589"
 
 url = address + @lat + "," + @lng
 
-  open(url).read
-    raw_data = open(url).read
+
+open(address).read
+    raw_data = open(address).read
     raw_data.class
     raw_data.length
     puts raw_data
@@ -80,5 +83,6 @@ url = address + @lat + "," + @lng
     @summary_of_next_several_days = parsed_data.fetch("daily").fetch("summary")
 
     render("meteorologist/street_to_weather.html.erb")
+
   end
 end
