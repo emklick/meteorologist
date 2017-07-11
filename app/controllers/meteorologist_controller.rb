@@ -14,6 +14,8 @@ class MeteorologistController < ApplicationController
     #
     # The street address that the user typed is in the variable @street_address.
     # ==========================================================================
+require 'open-uri'
+require 'json'
 
 require 'open-uri'
 require 'json'
@@ -42,19 +44,21 @@ open(url_url).read
     location = geometry["location"]
     location["lat"]
     location["lng"]
-    
+
+
+
     @latitude = parsed_data["results"][0]["geometry"]["location"]["lat"]
 
     @longitude = parsed_data["results"][0]["geometry"]["location"]["lng"]
 
-address = "https://api.darksky.net/forecast/b46b4b99659871b539612902438165d6/47.202967,-123.416703"
 
 
-url_forecast = address + @latitude + @longitude
+address = "https://api.darksky.net/forecast/b46b4b99659871b539612902438165d6/"
 
+url = address + @latitude + , + @longitude
 
-open(url_forecast).read
-    raw_data_forecast = open(url_forecast).read
+open(url).read
+    raw_data_forecast = open(url).read
     raw_data_forecast.class
     raw_data_forecast.length
     puts raw_data_forecast

@@ -21,7 +21,6 @@ require 'json'
 
 address = "https://api.darksky.net/forecast/b46b4b99659871b539612902438165d6/"
 
-
 url = address + @lat + , + @lng
 
 

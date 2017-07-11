@@ -1,0 +1,7 @@
+ @lat = 47.5469777784
+    @lng = -87.1684971237
+
+address = "https://api.darksky.net/forecast/b46b4b99659871b539612902438165d6/"
+
+
+url = "https://api.darksky.net/forecast/b46b4b99659871b539612902438165d6/" + @lat + , + @lng
