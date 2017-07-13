@@ -25,14 +25,8 @@ url = address + @lat + "," + @lng
 
 open(url).read
     raw_data = open(url).read
-    raw_data.class
-    raw_data.length
-    puts raw_data
-    parsed_data = JSON.parse(raw_data)
-    parsed_data.class
-    parsed_data.keys
-  
 
+    parsed_data = JSON.parse(raw_data)
 
     @current_temperature = parsed_data.fetch("currently").fetch("temperature")
 

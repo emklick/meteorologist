@@ -24,24 +24,24 @@ url_url = url + @street_address.gsub(" ", "+")
 
 open(url_url).read
     raw_data = open(url_url).read
-    raw_data.class
-    raw_data.length
-    puts raw_data
-    parsed_data = JSON.parse(raw_data)
-    parsed_data.class
-    parsed_data.keys
-    results = parsed_data["results"]
-    results.class
-    results.length
-    first = results[0]
-    first.class
-    first.keys
-    geometry = first["geometry"]
-    geometry.class
-    geometry.keys
-    location = geometry["location"]
-    location["lat"]
-    location["lng"]
+    # raw_data.class
+    # raw_data.length
+    # puts raw_data
+    # parsed_data = JSON.parse(raw_data)
+    # parsed_data.class
+    # parsed_data.keys
+    # results = parsed_data["results"]
+    # results.class
+    # results.length
+    # first = results[0]
+    # first.class
+    # first.keys
+    # geometry = first["geometry"]
+    # geometry.class
+    # geometry.keys
+    # location = geometry["location"]
+    # location["lat"]
+    # location["lng"]
     
     @lat = parsed_data["results"][0]["geometry"]["location"]["lat"].to_s
 
@@ -56,12 +56,12 @@ url_forecast = address + @lat + "," + @lng
 
 open(url_forecast).read
     raw_data_forecast = open(url_forecast).read
-    raw_data_forecast.class
-    raw_data_forecast.length
-    puts raw_data_forecast
+    # raw_data_forecast.class
+    # raw_data_forecast.length
+    # puts raw_data_forecast
     parsed_data_forecast = JSON.parse(raw_data_forecast)
-    parsed_data_forecast.class
-    parsed_data_forecast.keys
+    # parsed_data_forecast.class
+    # parsed_data_forecast.keys
   
 
 
